@@ -7,14 +7,32 @@
 </head>
 
 <body>
-<h2>Welcome to HyperJob, {% if is_authenticated %}{{ username }}{% else %}Guest{% endif %}!</h2>
-{% if not is_authenticated %}
-<div><a href="/login">Login</a></div>
-<div><a href="/logout">Logout</a></div>
-<div><a href="/signup">Signup</a></div>
-{% endif %}
-<div><a href="/vacancies">Vacancies</a></div>
-<div><a href="/resumes">Resumes</a></div>
-</body>
-
+    <h2>Welcome to Job Agency</h2>
+    {% if not is_authenticated %}
+    <p>Hello, <b>Guest</b></p>
+    <div><a href="/login">Login</a></div>
+    <div><a href="/signup">Signup</a></div>
+    {% else %}
+    <p>Hello, <b>{{ username }}</b>
+    {% if is_staff %}
+    <p>Create new vacancy:</p>
+    <form method="post" action="/vacancies/new">{% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit">Send</button>
+    </form>
+    {% else %}
+    <p>Create new resume:</p>
+    <form method="post" action="/resumes/new">{% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit">Send</button>
+    </form>
+    {% endif %}
+    {% endif %}
+    <br>
+    <br>
+    <div><a href="/vacancies">Vacancies</a></div>
+    <div><a href="/resumes">Resumes</a></div>
+    </body>
+    
+    </html>
 </html>
