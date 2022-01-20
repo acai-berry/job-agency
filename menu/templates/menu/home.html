@@ -14,18 +14,24 @@
     <div><a href="/signup">Signup</a></div>
     {% else %}
     <p>Hello, <b>{{ username }}</b>
+        <div><a href="/logout">Logout</a></div>
     {% if is_staff %}
     <p>Create new vacancy:</p>
     <form method="post" action="/vacancies/new">{% csrf_token %}
         <table>{{ form.as_table }}</table>
         <button type="submit">Send</button>
     </form>
+    <br/>
+    <br/>
+    <a href="/vacancies/my_vacancies">See your created vacancies</a>
     {% else %}
     <p>Create new resume:</p>
     <form method="post" action="/resumes/new">{% csrf_token %}
         <table>{{ form.as_table }}</table>
         <button type="submit">Send</button>
     </form>
+    <br />
+    <a href="/resumes/my_resumes">See your created resumes</a>
     {% endif %}
     {% endif %}
     <br>

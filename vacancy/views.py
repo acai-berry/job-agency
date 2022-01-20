@@ -25,3 +25,9 @@ class NewVacancyView(View):
         description = form.cleaned_data['description']
         Vacancy.objects.create(author=author, description=description)
         return redirect('/vacancies')
+
+class MyVacancies(View):
+    def get(self, request):
+        current_user = request.user
+        vacancies = Vacancy.objects.filter(author=current_user)
+        return render(request, 'vacancy/my_vacancies.html', {'vacancies': vacancies})

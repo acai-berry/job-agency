@@ -1,0 +1,12 @@
+<html>
+    <head></head>
+    <body>
+        {% for vacancy in vacancies %}
+        <div>{{vacancy.author}}: {{vacancy.description}}</div>
+        {% endfor %}
+        <br>
+        <form>
+            <input type="button" value="Go back!" onclick="history.back()">
+        </form>
+    </body>
+</html>
